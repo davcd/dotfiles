@@ -1,0 +1,14 @@
+# Navigation
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ~='cd ~'
+alias -g p='cd $HOME/projects'
+
+# Directory tree
+alias -g tdl="tree -a -I 'node_modules|.git|dist|build|.DS_Store|venv|target' --dirsfirst"
+
+# Tools
+alias g='git'
+alias k='kubectl'
+alias kctx='kubectx'
+alias kns='kubens'

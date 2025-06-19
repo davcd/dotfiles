@@ -1,0 +1,54 @@
+[core]
+	excludesfile = ~/.gitignore_global
+	editor = code --wait
+	filemode = false
+	autocrlf = input
+	pager = delta
+	ignorecase = false
+
+[alias]
+  amend = commit --amend --reuse-message=HEAD
+  br = branch
+  ci = commit
+  co = checkout
+  d = diff
+  g = grep --break --heading --line-number
+  l = log --graph --abbrev-commit --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+  ll = log --graph --abbrev-commit --pretty=oneline
+  p = push
+  pf = push --force
+  rh = reset --hard HEAD
+  ra = rebase --abort
+  rc = rebase --continue
+  s = status
+
+[credential]
+	helper = osxkeychain
+
+[pull]
+	rebase = true
+
+[rebase]
+	autoStash = true
+
+[init]
+	defaultBranch = main
+
+[fetch]
+	prune = true
+
+[diff]
+	tool = vscode
+
+[difftool "vscode"]
+	cmd = code --wait --diff $LOCAL $REMOTE
+
+[merge]
+	tool = vscode
+
+[mergetool "vscode"]
+	cmd = code --wait $MERGED
+	trustExitCode = true
+
+[color]
+	ui = auto

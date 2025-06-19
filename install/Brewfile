@@ -1,0 +1,26 @@
+# core/dotfiles
+brew "coreutils"
+brew "nano"
+
+# fs/network
+brew "tree"
+brew "unar"
+brew "curl"
+brew "wget"
+brew "zoxide"
+
+# search/grep/diff
+brew "fd"
+brew "fzf"
+brew "grep"
+brew "jq"
+
+# tools
+brew "gh"
+
+# devops
+brew "k9s"
+brew "kubectx"
+brew "krew"
+brew "minikube"
+brew "kubernetes-cli"
