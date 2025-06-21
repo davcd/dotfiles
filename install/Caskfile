@@ -8,7 +8,6 @@ cask "docker"
 cask "postman"
 
 cask "1password"
-cask "1password-cli"
 
 cask "notion"
 cask "obsidian"
@@ -17,7 +16,6 @@ cask "zoom"
 cask "vlc"
 cask "spotify"
 cask "whatsapp"
-cask "autofirma"
 
 cask "microsoft-excel"
 cask "microsoft-word"
