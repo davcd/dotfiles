@@ -2,7 +2,7 @@
 
 SCREENSHOTS_FOLDER="${HOME}/Screenshots"
 
-brew install dockutil mysides
+brew install dockutil
 
 # Dock
 defaults write com.apple.dock "orientation" -string "bottom"
@@ -46,14 +46,6 @@ defaults write com.apple.finder "FXEnableExtensionChangeWarning" -bool "false"
 defaults write NSGlobalDomain "NSDocumentSaveNewDocumentsToCloud" -bool "false"
 defaults write NSGlobalDomain "NSTableViewDefaultSizeMode" -int "2"
 defaults write com.apple.finder ShowRecentTags -bool false
-for item in $(mysides list | awk '{print $1}'); do
-  mysides remove "$item"
-done
-mysides add Projects file://${HOME}/Projects/
-mysides add Home file://${HOME}/
-mysides add Applications file:///Applications/
-mysides add Documents file://${HOME}/Documents/
-mysides add Downloads file://${HOME}/Downloads/
 
 # Screenshots
 defaults write com.apple.screencapture "disable-shadow" -bool "true"
