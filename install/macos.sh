@@ -19,11 +19,11 @@ if [ -e "/System/Applications/System Settings.app" ]; then dockutil --no-restart
 if [ -e "/System/Applications/Photos.app" ]; then dockutil --no-restart --add "/System/Applications/Photos.app"; fi
 if [ -e "/System/Applications/Launchpad.app" ]; then dockutil --no-restart --add "/System/Applications/Launchpad.app"; fi
 if [ -e "/System/Applications/Calendar.app" ]; then dockutil --no-restart --add "/System/Applications/Calendar.app"; fi
+if [ -e "/System/Applications/Mail.app" ]; then dockutil --no-restart --add "/System/Applications/Mail.app"; fi
 if [ -e "/Applications/Notion.app" ]; then dockutil --no-restart --add "/Applications/Notion.app"; fi
 if [ -e "/Applications/Obsidian.app" ]; then dockutil --no-restart --add "/Applications/Obsidian.app"; fi
 if [ -e "/System/Applications/Notes.app" ]; then dockutil --no-restart --add "/System/Applications/Notes.app"; fi
 if [ -e "/Applications/Google Chrome.app" ]; then dockutil --no-restart --add "/Applications/Google Chrome.app"; fi
-if [ -e "/System/Applications/Mail.app" ]; then dockutil --no-restart --add "/System/Applications/Mail.app"; fi
 if [ -e "/Applications/iTerm.app" ]; then dockutil --no-restart --add "/Applications/iTerm.app"; fi
 if [ -e "/Applications/Visual Studio Code.app" ]; then dockutil --no-restart --add "/Applications/Visual Studio Code.app"; fi
 if [ -e "/Applications/IntelliJ IDEA.app" ]; then dockutil --no-restart --add "/Applications/IntelliJ IDEA.app"; fi
