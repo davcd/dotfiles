@@ -78,9 +78,6 @@ defaults write NSGlobalDomain "com.apple.mouse.scaling" -float "1.5"
 # Calendar
 defaults write com.apple.iCal "first day of week" -int 1
 
-# Safari
-defaults write com.apple.Safari "ShowFullURLInSmartSearchField" -bool "true"
-
 # Control center
 defaults write com.apple.controlcenter BatteryShowPercentage -bool true
 
