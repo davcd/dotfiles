@@ -20,15 +20,14 @@ brew-packages: brew
 cask-apps: brew
 	brew bundle --file=$(DOTFILES_DIR)/install/Caskfile || true
 
-git: brew gh
+git: gh
 	$(ENV_SETUP) && bash $(DOTFILES_DIR)/install/git.sh
 
-gh:
+gh: brew
 	is-executable gh || brew install gh
-	$(ENV_SETUP) && if [ -z "$$GH_TOKEN" ]; then \
-		echo "Error: GH_TOKEN environment variable is not set."; \
-		exit 1; \
-	fi
+
+gh-auth: gh
+	gh auth status >/dev/null 2>&1 || gh auth login
 
 language-setup: java python go node
 
@@ -47,7 +46,7 @@ node:
 zsh: brew
 	$(ENV_SETUP) && sh $(DOTFILES_DIR)/install/zsh.sh
 
-projects-setup: gh
+projects-setup: gh-auth
 	$(ENV_SETUP) && sh $(DOTFILES_DIR)/install/projects.sh
 
 macos: brew

@@ -19,6 +19,8 @@ update_ssh_config() {
 # Upload a public key to a git host, or tell how to do it manually
 upload_key() {
   local host=$1 key=$2 type=$3
+  gh auth status --hostname "$host" >/dev/null 2>&1 \
+    || gh auth login --hostname "$host" --git-protocol ssh --scopes admin:public_key,admin:ssh_signing_key
   GH_HOST="$host" gh ssh-key add "$key.pub" --title "$(basename "$key")" --type "$type" \
     || echo "Could not upload $key.pub, add it manually at https://$host/settings/keys"
 }
@@ -42,7 +44,7 @@ for host in $GIT_HOSTS; do
   fi
 
   update_ssh_config "$host" "User git" "StrictHostKeyChecking accept-new" "AddKeysToAgent yes" \
-    "UseKeychain yes" "IdentitiesOnly yes" "IdentityFile $key"
+    "UseKeychain yes" "IdentitiesOnly yes" "IdentityFile ~/.ssh/$(basename "$key")"
   ssh -o BatchMode=yes -T "git@$host" || true
 done
 
