@@ -12,15 +12,17 @@ The goal of this project is to speed up the setup of a new laptop and centralize
   - Set up a base `.gitconfig` and configure user details
   - Define global `.gitignore`
   - Set up SSH keys
-    - Authorization
+    - Authorization (one key per host listed in `GIT_HOSTS`)
     - Signing
 - **Zsh**
   - Install Oh My Zsh
   - Install plugins
   - Install and configure spaceship theme
   - Define common aliases
-  - Enable lazy loading for language tools
+  - Put the default version of each language in `PATH` and lazy load only the version managers
+  - Skip the prompt and plugins in non-interactive shells (scripts, tools)
 - **Languages**
+  - Install the latest release of each major listed in `install/language/versions.env`
   - Install and configure version managers
     - Java (Sdkman)
     - Node.js (Nvm)
@@ -29,7 +31,7 @@ The goal of this project is to speed up the setup of a new laptop and centralize
 - **MacOS**
   - Apply system settings and preferences
 - **Projects**
-  - Clone personal GitHub repositories
+  - Clone personal GitHub repositories (asks for `gh auth login` if needed)
 
 ## How?
 
@@ -40,12 +42,16 @@ sudo softwareupdate -i -a
 xcode-select --install
 ```
 
-2. Copy `.env.example` to `.env` and update it with your environment variables.
-3. Run the desired `make` scripts. To execute all setup scripts, use:
+2. Copy `.env.example` to `.env` and update it with your variables (key prefix, git hosts, name and email).
+3. Run the desired `make` targets. To execute all setup scripts, use:
 
  ```shell
  make all
  ```
+
+ Or just one of them: `brew-packages`, `cask-apps`, `git`, `language-setup` (or `java`, `python`, `go`, `node`), `zsh`, `projects-setup`, `macos`.
+
+The scripts are written to be re-runnable. Git SSH keys that are created are uploaded with `gh`; if that is not possible, the public key path and where to add it are printed.
 
 ## Roadmap
 
