@@ -25,15 +25,9 @@ upload_key() {
 
 brew install git git-extras
 
-if [ -e "$HOME/.gitconfig_base" ]; then
-    mv "$HOME/.gitconfig_base" "$HOME/.gitconfig_base.backup.$(date +%Y%m%d_%H%M%S)"
-fi
-ln -sf "$DOTFILES_CONFIG/.gitconfig_base" "$HOME/.gitconfig_base"
+link-file "$DOTFILES_CONFIG/.gitconfig_base" "$HOME/.gitconfig_base"
 
-if [ -e "$HOME/.gitignore_global" ]; then
-    mv "$HOME/.gitignore_global" "$HOME/.gitignore_global.backup.$(date +%Y%m%d_%H%M%S)"
-fi
-ln -sf "$DOTFILES_CONFIG/.gitignore_global" "$HOME/.gitignore_global"
+link-file "$DOTFILES_CONFIG/.gitignore_global" "$HOME/.gitignore_global"
 
 # Ssh folder initialization
 mkdir -p "$HOME/.ssh"

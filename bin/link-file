@@ -1,0 +1,11 @@
+#!/bin/bash
+# Symlink $1 to $2. A regular file already at $2 is backed up first, an existing symlink is replaced.
+
+src=$1
+dest=$2
+
+if [ -e "$dest" ] && [ ! -L "$dest" ]; then
+  mv "$dest" "$dest.backup.$(date +%Y%m%d_%H%M%S)"
+fi
+
+ln -sfn "$src" "$dest"

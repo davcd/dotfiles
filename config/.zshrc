@@ -1,3 +1,10 @@
+# Homebrew
+if [ -x /opt/homebrew/bin/brew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [ -x /usr/local/bin/brew ]; then
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
+
 # Performance optimizations
 DISABLE_AUTO_UPDATE="true"
 DISABLE_MAGIC_FUNCTIONS="true"
@@ -82,8 +89,12 @@ lazy_loading '[[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"' nvm node n
 
 # Sdkman config
 export SDKMAN_DIR="$HOME/.sdkman"
-lazy_loading '[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"' sdk java javac gradle maven
+lazy_loading '[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"' sdk java javac gradle mvn
 
 # Gvm config
 export GVM_DIR="$HOME/.gvm"
 lazy_loading '[[ -s "$GVM_DIR/scripts/gvm" ]] && source "$GVM_DIR/scripts/gvm"' gvm go
+
+# Fuzzy finder and smarter cd
+command -v fzf >/dev/null && source <(fzf --zsh)
+command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
