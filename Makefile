@@ -1,10 +1,13 @@
 export DOTFILES_DIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 export DOTFILES_CONFIG := $(DOTFILES_DIR)/config
-export PATH := $(DOTFILES_DIR)/bin:$(PATH)
+export PATH := $(DOTFILES_DIR)/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$(PATH)
 
-ENV_SETUP := set -a && \
-    if [ -f ./.env ]; then . ./.env; fi && \
-    set +a
+LANGUAGES := java python go node
+
+# Run an install script with the variables of .env (if any) in its environment
+run = set -a && if [ -f $(DOTFILES_DIR)/.env ]; then . $(DOTFILES_DIR)/.env; fi && set +a && bash $(DOTFILES_DIR)/install/$(1)
+
+.PHONY: all compatible brew brew-packages cask-apps git gh gh-auth language-setup $(LANGUAGES) zsh projects-setup macos
 
 all: compatible brew brew-packages cask-apps git language-setup zsh projects-setup macos
 
@@ -12,16 +15,13 @@ compatible:
 	is-macos || (echo "This Makefile is only compatible with macOS." && exit 1)
 
 brew:
-	is-executable brew || curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash
+	is-executable brew || curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash
 
 brew-packages: brew
-	brew bundle --file=$(DOTFILES_DIR)/install/Brewfile || true
+	brew bundle --file=$(DOTFILES_DIR)/install/Brewfile || echo "Warning: some Homebrew packages failed to install"
 
 cask-apps: brew
-	brew bundle --file=$(DOTFILES_DIR)/install/Caskfile || true
-
-git: gh
-	$(ENV_SETUP) && bash $(DOTFILES_DIR)/install/git.sh
+	brew bundle --file=$(DOTFILES_DIR)/install/Caskfile || echo "Warning: some Homebrew casks failed to install"
 
 gh: brew
 	is-executable gh || brew install gh
@@ -29,25 +29,19 @@ gh: brew
 gh-auth: gh
 	gh auth status >/dev/null 2>&1 || gh auth login
 
-language-setup: java python go node
+git: gh
+	$(call run,git.sh)
 
-java: brew
-	$(ENV_SETUP) && bash $(DOTFILES_DIR)/install/language/java.sh
+language-setup: $(LANGUAGES)
 
-python: brew
-	$(ENV_SETUP) && bash $(DOTFILES_DIR)/install/language/python.sh
-
-go: brew
-	$(ENV_SETUP) && bash $(DOTFILES_DIR)/install/language/go.sh
-
-node:
-	$(ENV_SETUP) && bash $(DOTFILES_DIR)/install/language/node.sh
+$(LANGUAGES): brew
+	$(call run,language/$@.sh)
 
 zsh: brew
-	$(ENV_SETUP) && sh $(DOTFILES_DIR)/install/zsh.sh
+	$(call run,zsh.sh)
 
 projects-setup: gh-auth
-	$(ENV_SETUP) && sh $(DOTFILES_DIR)/install/projects.sh
+	$(call run,projects.sh)
 
 macos: brew
-	$(ENV_SETUP) && sh $(DOTFILES_DIR)/install/macos.sh
+	$(call run,macos.sh)
