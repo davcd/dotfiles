@@ -2,7 +2,7 @@
 . "$(dirname "$0")/versions.env"
 
 if [ ! -d "$HOME/.gvm" ]; then
-  curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer | bash
+  curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer | GVM_NO_UPDATE_PROFILE=1 bash
 fi
 
 source "$HOME/.gvm/scripts/gvm"

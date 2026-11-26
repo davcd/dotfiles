@@ -4,7 +4,7 @@
 brew install maven gradle
 
 if [ ! -d "$HOME/.sdkman" ]; then
-  curl -s "https://get.sdkman.io?ci=true" | bash
+  curl -s "https://get.sdkman.io?ci=true&rcupdate=false" | bash
 fi
 
 source "$HOME/.sdkman/bin/sdkman-init.sh"
