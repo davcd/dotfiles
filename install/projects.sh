@@ -1,14 +1,14 @@
-#!/bin/sh
+#!/bin/bash
 
-mkdir -p "${HOME}/Projects"
+PROJECTS_DIR="$HOME/Projects"
+mkdir -p "$PROJECTS_DIR"
 
-gh repo list --limit 100 --json name,sshUrl | jq -r '.[] | .name + " " + .sshUrl' | while read -r repo; do
-  repo_name=$(echo "$repo" | awk '{print $1}')
-  repo_url=$(echo "$repo" | awk '{print $2}')
-
-  if [ ! -d "${HOME}/Projects/${repo_name}" ]; then
-    git clone "$repo_url" "${HOME}/Projects/${repo_name}"
+gh repo list --limit 100 --json name,sshUrl --jq '.[] | [.name, .sshUrl] | @tsv' |
+while IFS=$'\t' read -r name url; do
+  if [ -d "$PROJECTS_DIR/$name" ]; then
+    echo "Repository $name already exists in Projects."
   else
-    echo "Repository ${repo_name} already exists in Projects."
+    # stdin closed: ssh would otherwise swallow the rest of the repo list
+    git clone "$url" "$PROJECTS_DIR/$name" </dev/null
   fi
 done
