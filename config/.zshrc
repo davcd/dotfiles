@@ -70,7 +70,7 @@ ZSH_THEME="spaceship"
 # Spaceship settings
 SPACESHIP_PROMPT_PRECOMPILE=false
 SPACESHIP_PROMPT_ASYNC=false
-SPACESHIP_PROMPT_ADD_NEWLINE=true
+SPACESHIP_PROMPT_ADD_NEWLINE=false
 
 # Minimal spaceship sections for performance
 SPACESHIP_PROMPT_ORDER=(
