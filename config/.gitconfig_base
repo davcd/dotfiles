@@ -1,10 +1,8 @@
 [core]
 	excludesfile = ~/.gitignore_global
 	editor = code --wait
-	filemode = false
 	autocrlf = input
 	pager = delta
-	ignorecase = false
 
 [alias]
   amend = commit --amend --reuse-message=HEAD
@@ -16,7 +14,7 @@
   l = log --graph --abbrev-commit --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
   ll = log --graph --abbrev-commit --pretty=oneline
   p = push
-  pf = push --force
+  pf = push --force-with-lease
   rh = reset --hard HEAD
   ra = rebase --abort
   rc = rebase --continue
@@ -27,6 +25,9 @@
 
 [pull]
 	rebase = true
+
+[push]
+	autoSetupRemote = true
 
 [rebase]
 	autoStash = true
@@ -39,12 +40,14 @@
 
 [diff]
 	tool = vscode
+	algorithm = histogram
 
 [difftool "vscode"]
 	cmd = code --wait --diff $LOCAL $REMOTE
 
 [merge]
 	tool = vscode
+	conflictstyle = zdiff3
 
 [mergetool "vscode"]
 	cmd = code --wait $MERGED
@@ -52,3 +55,15 @@
 
 [color]
 	ui = auto
+
+[rerere]
+	enabled = true
+
+[branch]
+	sort = -committerdate
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true

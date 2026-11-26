@@ -14,6 +14,7 @@ brew "fd"
 brew "fzf"
 brew "grep"
 brew "jq"
+brew "git-delta"
 
 # tools
 brew "gh"

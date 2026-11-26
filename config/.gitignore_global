@@ -11,24 +11,6 @@
 .vscode/
 *.vsix
 
-# Directories
-output/
-out/
-target/
-build/
-dist/
-generated/
-tmp/
-
-# Tests
-lib-cov/
-.coverage
-.coverage.*
-coverage.xml
-*.out
-*.cover
-cover/
-
 # Logs
 *.log
 logs/
