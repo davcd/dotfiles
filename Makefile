@@ -33,16 +33,16 @@ gh:
 language-setup: java python go node
 
 java: brew
-	$(ENV_SETUP) && sh $(DOTFILES_DIR)/install/language/java.sh
+	$(ENV_SETUP) && bash $(DOTFILES_DIR)/install/language/java.sh
 
 python: brew
-	$(ENV_SETUP) && sh $(DOTFILES_DIR)/install/language/python.sh
+	$(ENV_SETUP) && bash $(DOTFILES_DIR)/install/language/python.sh
 
 go: brew
-	$(ENV_SETUP) && sh $(DOTFILES_DIR)/install/language/go.sh
+	$(ENV_SETUP) && bash $(DOTFILES_DIR)/install/language/go.sh
 
 node:
-	$(ENV_SETUP) && sh $(DOTFILES_DIR)/install/language/node.sh
+	$(ENV_SETUP) && bash $(DOTFILES_DIR)/install/language/node.sh
 
 zsh: brew
 	$(ENV_SETUP) && sh $(DOTFILES_DIR)/install/zsh.sh

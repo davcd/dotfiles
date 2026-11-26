@@ -1,15 +1,15 @@
-#!/bin/sh
+#!/bin/bash
+. "$(dirname "$0")/versions.env"
 
 if [ ! -d "$HOME/.nvm" ]; then
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 fi
 
 export NVM_DIR="$HOME/.nvm"
-if [ -s "$NVM_DIR/nvm.sh" ]; then
-  source "$NVM_DIR/nvm.sh"
-fi
+source "$NVM_DIR/nvm.sh"
 
-nvm install 20 --skip-default-packages --latest-npm
-nvm install 22 --skip-default-packages --latest-npm
+for major in $NODE_MAJORS; do
+  nvm install "$major" --skip-default-packages --latest-npm
+done
 
-nvm alias default 22 && nvm use 22
+nvm alias default "$NODE_DEFAULT"
