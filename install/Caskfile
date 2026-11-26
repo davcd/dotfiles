@@ -5,7 +5,6 @@ cask "iterm2"
 cask "visual-studio-code"
 cask "intellij-idea"
 cask "docker"
-cask "postman"
 
 cask "1password"
 
