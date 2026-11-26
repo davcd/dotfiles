@@ -21,7 +21,7 @@ cask-apps: brew
 	brew bundle --file=$(DOTFILES_DIR)/install/Caskfile || true
 
 git: brew gh
-	$(ENV_SETUP) && sh $(DOTFILES_DIR)/install/git.sh
+	$(ENV_SETUP) && bash $(DOTFILES_DIR)/install/git.sh
 
 gh:
 	is-executable gh || brew install gh
