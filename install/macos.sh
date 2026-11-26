@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 SCREENSHOTS_FOLDER="${HOME}/Screenshots"
 
@@ -14,24 +14,29 @@ defaults write com.apple.dock "show-recents" -bool "false"
 defaults write com.apple.dock "mineffect" -string "genie"
 defaults write com.apple.dock "scroll-to-open" -bool "true"
 
+DOCK_APPS=(
+  "/System/Applications/System Settings.app"
+  "/System/Applications/Photos.app"
+  "/System/Applications/Launchpad.app"
+  "/System/Applications/Calendar.app"
+  "/System/Applications/Mail.app"
+  "/Applications/Notion.app"
+  "/Applications/Obsidian.app"
+  "/System/Applications/Notes.app"
+  "/Applications/Google Chrome.app"
+  "/Applications/iTerm.app"
+  "/Applications/Visual Studio Code.app"
+  "/Applications/IntelliJ IDEA.app"
+  "/Applications/Slack.app"
+  "/Applications/WhatsApp.app"
+  "/Applications/zoom.us.app"
+  "/Applications/Spotify.app"
+)
+
 dockutil --no-restart --remove all
-if [ -e "/System/Applications/System Settings.app" ]; then dockutil --no-restart --add "/System/Applications/System Settings.app"; fi
-if [ -e "/System/Applications/Photos.app" ]; then dockutil --no-restart --add "/System/Applications/Photos.app"; fi
-if [ -e "/System/Applications/Launchpad.app" ]; then dockutil --no-restart --add "/System/Applications/Launchpad.app"; fi
-if [ -e "/System/Applications/Calendar.app" ]; then dockutil --no-restart --add "/System/Applications/Calendar.app"; fi
-if [ -e "/System/Applications/Mail.app" ]; then dockutil --no-restart --add "/System/Applications/Mail.app"; fi
-if [ -e "/Applications/Notion.app" ]; then dockutil --no-restart --add "/Applications/Notion.app"; fi
-if [ -e "/Applications/Obsidian.app" ]; then dockutil --no-restart --add "/Applications/Obsidian.app"; fi
-if [ -e "/System/Applications/Notes.app" ]; then dockutil --no-restart --add "/System/Applications/Notes.app"; fi
-if [ -e "/Applications/Google Chrome.app" ]; then dockutil --no-restart --add "/Applications/Google Chrome.app"; fi
-if [ -e "/Applications/iTerm.app" ]; then dockutil --no-restart --add "/Applications/iTerm.app"; fi
-if [ -e "/Applications/Visual Studio Code.app" ]; then dockutil --no-restart --add "/Applications/Visual Studio Code.app"; fi
-if [ -e "/Applications/IntelliJ IDEA.app" ]; then dockutil --no-restart --add "/Applications/IntelliJ IDEA.app"; fi
-if [ -e "/Applications/Postman.app" ]; then dockutil --no-restart --add "/Applications/Postman.app"; fi
-if [ -e "/Applications/Slack.app" ]; then dockutil --no-restart --add "/Applications/Slack.app"; fi
-if [ -e "/Applications/WhatsApp.app" ]; then dockutil --no-restart --add "/Applications/WhatsApp.app"; fi
-if [ -e "/Applications/zoom.us.app" ]; then dockutil --no-restart --add "/Applications/zoom.us.app"; fi
-if [ -e "/Applications/Spotify.app" ]; then dockutil --no-restart --add "/Applications/Spotify.app"; fi
+for app in "${DOCK_APPS[@]}"; do
+  [ -e "$app" ] && dockutil --no-restart --add "$app"
+done
 
 # Finder
 defaults write com.apple.finder "QuitMenuItem" -bool "false"
@@ -74,5 +79,5 @@ defaults write com.apple.iCal "first day of week" -int 1
 defaults write com.apple.controlcenter BatteryShowPercentage -bool true
 
 for app in "Dock" "Finder" "SystemUIServer" "Calendar" "Safari"; do
-  killall "${app}" &> /dev/null
+  killall "${app}" >/dev/null 2>&1
 done
